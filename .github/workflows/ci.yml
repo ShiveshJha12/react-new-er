@@ -51,10 +51,10 @@ jobs:
         cd frontend
         npm install
 
-    - name: Build frontend
+    - name: Start frontend
       run: |
         cd frontend
-        npm run build
+        npm start
 
     - name: Start backend server
       run: |
