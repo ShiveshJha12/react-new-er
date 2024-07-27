@@ -21,10 +21,6 @@ jobs:
           MYSQL_DATABASE: test_db
         options: --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=3
 
-    strategy:
-      matrix:
-        node-version: [14.x]
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -32,17 +28,23 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '14'
 
     - name: Install backend dependencies
       run: |
         cd backend
         npm install
 
-    - name: Run backend migrations
+    - name: Set up database
       run: |
-        cd backend
-        npx sequelize-cli db:migrate
+        sleep 15 # wait for MySQL to start
+        mysql -h 127.0.0.1 -u root -proot -e 'CREATE DATABASE IF NOT EXISTS test_db;'
+        mysql -h 127.0.0.1 -u root -proot test_db < backend/db/schema.sql # Assuming you have a SQL schema file
+      env:
+        DB_HOST: 127.0.0.1
+        DB_USER: root
+        DB_PASSWORD: root
+        DB_NAME: test_db
 
     - name: Install frontend dependencies
       run: |
