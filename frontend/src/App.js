@@ -8,7 +8,7 @@ import AddEvent from './components/AddEvent';
 import AddFinance from './components/AddFinance';
 
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  // const [token, setToken] = useState(localStorage.getItem('token'));
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
 
   useEffect(() => {
