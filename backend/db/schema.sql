@@ -24,4 +24,6 @@ CREATE TABLE IF NOT EXISTS finances (
     amount DECIMAL(10, 2) NOT NULL,
     date DATE NOT NULL,
     description TEXT,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );

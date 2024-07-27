@@ -39,7 +39,7 @@ jobs:
       run: |
         sleep 15 # wait for MySQL to start
         mysql -h 127.0.0.1 -u root -proot -e 'CREATE DATABASE IF NOT EXISTS test_db;'
-        mysql -h 127.0.0.1 -u root -proot test_db < backend/db/schema.sql # Assuming you have a SQL schema file
+        mysql -h 127.0.0.1 -u root -proot test_db < backend/db/schema.sql
       env:
         DB_HOST: 127.0.0.1
         DB_USER: root
