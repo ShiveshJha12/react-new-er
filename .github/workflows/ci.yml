@@ -54,7 +54,7 @@ jobs:
     - name: Start frontend
       run: |
         cd frontend
-        npm start
+        npm start &
 
     - name: Start backend server
       run: |
